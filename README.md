@@ -9,6 +9,6 @@ to run each solution, run
 cargo run -p dayX
 ```
 
-where X is the day. Input (`input.txt`) and test (`test.txt`)
+where X is the day. Input (`input.txt`) and test (`test.txt`) files
 must be placed in the same directory as the relevant binary (ergo src/day1/src/)
-to successfully build.
+to successfully build/test.

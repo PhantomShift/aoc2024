@@ -5,11 +5,8 @@ fn solve_part_one(input: &str) -> i32 {
     let lines = input.lines()
         .into_iter()
         .map(|s| {
-            if let [l, r] = s.trim_end().split("   ").collect::<Vec<_>>()[..] {
-                (l.parse().expect("should be a number"), r.parse().expect("should be a number"))
-            } else {
-                unreachable!()
-            }
+            let (l, r) = s.split_once("   ").expect("should split");
+            (l.parse().expect("should be a number"), r.parse().expect("should be a number"))
         });
     let mut left: Vec<i32> = Vec::new();
     let mut right: Vec<i32> = Vec::new();
@@ -33,8 +30,7 @@ fn solve_part_two(input: &str) -> u32 {
     let lines = input.lines()
         .into_iter()
         .map(|s| {
-            let mut s = s.trim_end().split("   ");
-            (s.next().expect("left side should exist"), s.next().expect("right side should exist"))
+            s.trim_end().split_once("   ").expect("split should work")
         });
     let mut left_count = HashMap::new();
     let mut right_count = HashMap::new();

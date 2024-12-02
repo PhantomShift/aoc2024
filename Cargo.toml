@@ -8,4 +8,4 @@ edition = "2021"
 [workspace]
 members = [
     "src/day1"
-]
+, "src/day2"]

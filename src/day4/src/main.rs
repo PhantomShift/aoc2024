@@ -92,7 +92,44 @@ fn test_part_one() {
     assert_eq!(18, solve_part_one(input));
 }
 
+fn solve_part_two(input: &str) -> usize {
+    let (max_x, max_y) = get_dimensions(input);
+    let flat = input.replace('\n', "");
+    let mut total = 0;
+
+    macro_rules! flat_get {
+        ($x:expr, $y:expr) => {
+            flat.as_bytes()[$x + $y * max_x]
+        };
+    }
+
+    for x in 1..max_x-1 {
+        for y in 1..max_y-1 {
+            if flat_get!(x, y) == b'A' {
+                match &[
+                    flat_get!(x-1, y-1), // top left
+                    flat_get!(x+1, y+1), // bottom right
+                    flat_get!(x-1, y+1), // bottom left
+                    flat_get!(x+1, y-1), // top right
+                ] {
+                    b"MSMS" | b"MSSM" | b"SMMS" | b"SMSM" => total += 1,
+                    _ => ()
+                }
+            }
+        }
+    }
+
+    total
+}
+
+#[test]
+fn test_part_two() {
+    let input = include_str!("test.txt");
+    assert_eq!(9, solve_part_two(input));
+}
+
 fn main() {
     let input = include_str!("input.txt");
     println!("Part 1: {}", solve_part_one(input));
+    println!("Part 2: {}", solve_part_two(input));
 }

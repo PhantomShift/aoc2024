@@ -76,9 +76,9 @@ fn solve_part_two(input: &str) -> u32 {
             let mid = numbers.len() / 2;
             loop {
                 let middle = numbers[mid];
-                if set.contains(middle) {
+                let corrected = if set.contains(middle) {
                     let mut rules_iter = rules.iter();
-                    let corrected = loop {
+                    loop {
                         match rules_iter.next() {
                             Some(&(first, after)) if first == middle => {
                                 match find_pos(&numbers, after) {
@@ -101,10 +101,12 @@ fn solve_part_two(input: &str) -> u32 {
                             None => break false,
                             _ => (),
                         }
-                    };
-                    if !corrected {
-                        break Some(middle.parse::<u32>().expect("should be a number"))
                     }
+                } else {
+                    false
+                };
+                if !corrected {
+                    break Some(middle.parse::<u32>().expect("should be a number"))
                 }
             }
         } else {

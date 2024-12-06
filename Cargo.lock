@@ -28,3 +28,7 @@ version = "0.1.0"
 [[package]]
 name = "day5"
 version = "0.1.0"
+
+[[package]]
+name = "day5alt"
+version = "0.1.0"
